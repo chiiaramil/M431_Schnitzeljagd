@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="de">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Schnitzeljagd 3</title>
+    <style>
+      body {
+        font-family: "Roboto", Arial, sans-serif;
+        background-color: #d2e8e3; /* Hintergrundfarbe des gesamten Dokuments */
+        padding: 20px;
+        display: flex;
+        justify-content: center;
+      }
+      .form-container {
+        max-width: 500px;
+        background-color: #ffffff;
+        padding: 40px;
+        border-radius: 10px;
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+        margin: 20px;
+      }
+      h2 {
+        text-align: center;
+        color: #333333;
+        margin-bottom: 30px;
+        text-transform: uppercase;
+      }
+      .form-description {
+        margin-bottom: 20px;
+        color: #666666;
+        text-align: center;
+      }
+      .form-group {
+        margin-bottom: 25px;
+      }
+      .form-group label {
+        font-weight: bold;
+        display: block;
+        margin-bottom: 8px;
+        color: #555555;
+      }
+      .form-group input[type="text"],
+      .form-group input[type="email"],
+      .form-group textarea {
+        width: 100%;
+        padding: 10px 0;
+        border: none;
+        border-bottom: 2px solid #e0e0e0;
+        font-size: 16px;
+        background-color: transparent;
+        transition: border-color 0.3s ease;
+      }
+      .form-group input[type="text"]:focus,
+      .form-group input[type="email"]:focus,
+      .form-group textarea:focus {
+        border-color: #008f8c;
+        outline: none;
+      }
+      .form-group textarea {
+        height: 120px;
+        resize: none;
+      }
+      .form-group button {
+        background-color: #008f8c;
+        color: #ffffff;
+        border: none;
+        padding: 14px 24px;
+        border-radius: 6px;
+        cursor: pointer;
+        font-size: 16px;
+        text-transform: uppercase;
+        transition: background-color 0.3s ease;
+      }
+      .form-group button:hover {
+        background-color: #015958;
+      }
+      .form-group button:active {
+        background-color: #015958;
+      }
+      .guide-container {
+        max-width: 300px;
+        background-color: #ffffff;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+        margin: 20px;
+      }
+      .guide-text {
+        color: #333333;
+        line-height: 1.5;
+      }
+      /* Stil für das Modal */
+      .modal {
+        display: none;
+        position: fixed;
+        z-index: 1;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        overflow: auto;
+        background-color: rgba(0, 0, 0, 0.5);
+      }
+      .modal-content {
+        background-color: #fefefe;
+        margin: 15% auto;
+        padding: 20px;
+        border: 1px solid #888;
+        width: 80%;
+        max-width: 600px;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        position: relative;
+      }
+      .close {
+        color: #aaa;
+        float: right;
+        font-size: 28px;
+        font-weight: bold;
+        cursor: pointer;
+      }
+      .close:hover,
+      .close:focus {
+        color: black;
+        text-decoration: none;
+        cursor: pointer;
+      }
+      .modal-body img {
+        width: 100%;
+        height: auto;
+        border-radius: 10px;
+      }
+      /* Stil für den Help Button */
+      #helpButton {
+        background-color: #023535;
+        color: #ffffff;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 14px;
+        text-transform: uppercase;
+        transition: background-color 0.3s ease;
+      }
+      #helpButton:hover {
+        background-color: #facfce;
+      }
+      /* Stil für das Standortzeichen */
+      .location-icon {
+        display: inline-block;
+        width: 20px;
+        height: 20px;
+        background-color: #008f8c;
+        color: #ffffff;
+        text-align: center;
+        line-height: 20px;
+        border-radius: 50%;
+        margin-right: 5px;
+      }
+      /* Stil für das Zielflaggen Icon */
+      .flag-icon {
+        display: inline-block;
+        width: 20px;
+        height: 20px;
+        background-color: #015958;
+        color: #ffffff;
+        text-align: center;
+        line-height: 20px;
+        border-radius: 50%;
+        margin-right: 5px;
+      }
+      @media (min-width: 600px) {
+        .form-container,
+        .guide-container {
+          flex: 1 1 45%; /* Boxen nebeneinander, wenn Bildschirmbreite mindestens 600px beträgt */
+        }
+      }
+    </style>
+    <script>
+      // JavaScript für das Modal und die Formularvalidierung
+      document.addEventListener("DOMContentLoaded", function () {
+        var modal = document.getElementById("helpModal");
+        var helpBtn = document.getElementById("helpButton");
+        var closeBtn = document.getElementsByClassName("close")[0];
+
+        // Öffnen des Modals beim Klicken auf den Help Button
+        helpBtn.onclick = function () {
+          modal.style.display = "block";
+        };
+
+        // Schließen des Modals beim Klicken auf das Schließen-Symbol
+        closeBtn.onclick = function () {
+          modal.style.display = "none";
+        };
+
+        // Schließen des Modals beim Klicken außerhalb des Modals
+        window.onclick = function (event) {
+          if (event.target == modal) {
+            modal.style.display = "none";
+          }
+        };
+
+        // Formularvalidierung und Weiterleitung zum nächsten Schritt
+        var form = document.querySelector("form");
+        form.addEventListener("submit", function (event) {
+          event.preventDefault(); // Verhindert das tatsächliche Absenden des Formulars
+
+          // Hier kannst du die Validierung für das Eingabefeld hinzufügen
+          var input = document.getElementById("name");
+          var inputValue = input.value.trim(); // Wert des Eingabefelds ohne führende und abschließende Leerzeichen
+
+          // Beispiel für eine einfache Validierung (Hier kann deine spezifische Logik stehen)
+          if (inputValue.toLowerCase() === "2") {
+            // Überprüfung des Eingabewerts
+            // Weiterleitung oder Aktion für den nächsten Schritt
+            window.location.href = "Step4.html";
+            // Hier könntest du zum nächsten Schritt navigieren, z.B.:
+            // window.location.href = 'step3.html';
+          } else {
+            alert("Diese Antwort ist falsch"); // Hier anpassen, je nach Validierungsanforderungen
+          }
+        });
+      });
+    </script>
+  </head>
+  <body>
+    <div class="guide-container">
+      <div class="guide-text">
+        <h1>Es geht weiter...</h1>
+        <p><span class="location-icon">&#x1F4CD;</span> Startpunkt Mensa</p>
+        <p><span class="flag-icon">&#9873;</span> Endpunkt Aula</p>
+        <p>
+          Wenn du die Mensa verlässt, gehst du am Plakat vorbei und folgst dem
+          Gang bis zu den Schliessfächern. Dort wendest du dich nach links und
+          suchst den Eingang zur Aula.
+        </p>
+      </div>
+      <button id="helpButton">Help</button>
+    </div>
+
+    <div class="form-container">
+      <div class="form-description">
+        <p>Suche die Schnitzel auf der Jagd im BBZW</p>
+      </div>
+      <h2>Frage #3</h2>
+      <form action="#" method="POST">
+        <div class="form-group">
+          <label for="name"
+            >Wie viele Waschbecken befinden sich in der Aula?</label
+          >
+          <input
+            type="number"
+            id="name"
+            name="name"
+            placeholder="Deine Antwort..."
+            required
+            pattern="2"
+          />
+        </div>
+        <div class="form-group">
+          <button type="submit">Nächster Schritt</button>
+        </div>
+      </form>
+    </div>
+
+    <!-- Modal -->
+    <div id="helpModal" class="modal">
+      <div class="modal-content">
+        <span class="close">&times;</span>
+        <div class="modal-body">
+          <img src="images/Aula.jpeg" alt="Hilfe Bild" />
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gratulation</title>
+<style>
+    body {
+        font-family: 'Roboto', Arial, sans-serif;
+        background-color: #D2E8E3; /* Hintergrundfarbe des gesamten Dokuments */
+        padding: 20px;
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap; /* Ermöglicht Umbruch der Boxen */
+    }
+    .form-container, .guide-container {
+        max-width: 500px;
+        background-color: #ffffff;
+        padding: 40px;
+        border-radius: 10px;
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+        margin: 20px;
+        flex: 1 1 100%; /* Boxen nehmen in der Handyansicht die volle Breite ein */
+    }
+    h2 {
+        text-align: center;
+        color: #333333;
+        margin-bottom: 30px;
+        text-transform: uppercase;
+    }
+    .form-description {
+        margin-bottom: 20px;
+        color: #666666;
+        text-align: center;
+    }
+    .form-group {
+        margin-bottom: 25px;
+    }
+    .form-group label {
+        font-weight: bold;
+        display: block;
+        margin-bottom: 8px;
+        color: #555555;
+    }
+    .form-group input[type="text"] {
+        width: 100%;
+        padding: 10px 0;
+        border: none;
+        border-bottom: 2px solid #e0e0e0;
+        font-size: 16px;
+        background-color: transparent;
+        transition: border-color 0.3s ease;
+    }
+    .form-group input[type="text"]:focus {
+        border-color: #008F8C;
+        outline: none;
+    }
+
+    .form-group button {
+        background-color: #008F8C;
+        color: #ffffff;
+        border: none;
+        padding: 14px 24px;
+        border-radius: 6px;
+        cursor: pointer;
+        font-size: 16px;
+        text-transform: uppercase;
+        transition: background-color 0.3s ease;
+    }
+    .form-group button:hover {
+        background-color: #015958;
+    }
+    .form-group button:active {
+        background-color: #015958;
+    }
+    .guide-text {
+        color: #333333;
+        line-height: 1.5;
+    }
+    /* Stil für das Modal */
+    .modal {
+        display: none;
+        position: fixed;
+        z-index: 1;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        overflow: auto;
+        background-color: rgba(0,0,0,0.5);
+    }
+    .modal-content {
+        background-color: #fefefe;
+        margin: 15% auto;
+        padding: 20px;
+        border: 1px solid #888;
+        width: 80%;
+        max-width: 600px;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        position: relative;
+    }
+    .close {
+        color: #aaa;
+        float: right;
+        font-size: 28px;
+        font-weight: bold;
+        cursor: pointer;
+    }
+    .close:hover,
+    .close:focus {
+        color: black;
+        text-decoration: none;
+        cursor: pointer;
+    }
+    .modal-body img {
+        width: 100%;
+        height: auto;
+        border-radius: 10px;
+    }
+    /* Stil für den Help Button */
+    #helpButton {
+        background-color: #023535;
+        color: #ffffff;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 14px;
+        text-transform: uppercase;
+        transition: background-color 0.3s ease;
+    }
+    #helpButton:hover {
+        background-color: #FACFCE;
+    }
+    /* Stil für das Standortzeichen */
+    .location-icon {
+        display: inline-block;
+        width: 20px;
+        height: 20px;
+        background-color: #008F8C;
+        color: #ffffff;
+        text-align: center;
+        line-height: 20px;
+        border-radius: 50%;
+        margin-right: 5px;
+    }
+    /* Stil für das Zielflaggen Icon */
+    .flag-icon {
+        display: inline-block;
+        width: 20px;
+        height: 20px;
+        background-color: #015958;
+        color: #ffffff;
+        text-align: center;
+        line-height: 20px;
+        border-radius: 50%;
+        margin-right: 5px;
+    }
+    @media (min-width: 600px) {
+        .form-container, .guide-container {
+            flex: 1 1 45%; /* Boxen nebeneinander, wenn Bildschirmbreite mindestens 600px beträgt */
+        }
+    }
+</style>
+</head>
+<body>
+
+<div class="form-container">
+    <div class="form-description">
+        <p>Suche die Schnitzel auf der Jagd im BBZW</p>
+    </div>
+    <h2>JUHU</h2>
+        <p>Juhu, du hast es geschafft. Die Mission ist dir geglückt. Du kennst dich nun besser auf dem Campus aus.</p>
+        <div class="form-group">
+            <a href="Start.html">
+            <button type="submit">Von vorne</button>
+        </a>
+        </div>
+</div>
+
+</body>
+</html>
